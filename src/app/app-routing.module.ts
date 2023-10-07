@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoryComponent } from './category/category.component';
+import { TodoComponent } from './todo/todo.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+
+  //default path url
+  {path: '', component: CategoryComponent},
+  {path: 'todo', component: TodoComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
