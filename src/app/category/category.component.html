@@ -9,9 +9,9 @@
 
 <div class="row">
   <div class="col-md-12">
-    <form action="" class="form-inline">
+    <form #f="ngForm" (ngSubmit)='onSubmit(f)' class="form-inline">
       <div class="form-group">
-        <input type="text" placeholder="add new categories" name="categoryName"class="col-md-10 m-2 drop-shadow" />
+        <input type="text" placeholder="add new categories" name="categoryName"class="col-md-10 m-2 border-danger drop-shadow " ngModel required #category = 'ngModel'/>
         <button
           type="submit"
           class="col-md-2 m-2 btn btn-primary btn-todo btn-block drop-shadow">
