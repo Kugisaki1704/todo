@@ -28,3 +28,7 @@ input{
     border-style: none!important;
     width: 80%!important ;
 }
+
+.border-danger {
+    border: 1px solid red !important;
+}
