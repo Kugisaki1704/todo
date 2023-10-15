@@ -46,4 +46,10 @@ this.afs.doc('categories/'+id).update({category: updatedData}).then(()=>{
 })
 }
 
+deleteCategory(id:string)
+{
+  this.afs.doc('categories/'+ id).delete().then(()=>{
+  this.toastr.error("Category Deleted Successfully");
+  })
+}
 }

@@ -56,5 +56,8 @@ export class CategoryComponent implements OnInit{
       this.dataStatus= 'Edit';
       this.catId= id;
     }
+    onDelete(id:string){
+        this.categoryService.deleteCategory(id);
+    }
   }
 
