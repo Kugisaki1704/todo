@@ -40,10 +40,10 @@ loadCategories(): Observable<Category[]> {
   return this.categoriesCollection.valueChanges({ idField: 'id' });
 }
 
-// updateCategory(id:string, updatedData){
-// this.afs.doc('categories/'+id).update({category: updatedData}).then(()=>{
-//   console.log('updated');
-// })
-// }
+updateCategory(id:string, updatedData:any){
+this.afs.doc('categories/'+id).update({category: updatedData}).then(()=>{
+  this.toastr.success("Updated Successfully");
+})
+}
 
 }

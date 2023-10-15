@@ -12,6 +12,11 @@ export class CategoryComponent implements OnInit{
   color: Array<any> = ['#e7845e', '#fc0184', '#f6b93f', '#9224a7', '#20c898', '#f03734', '#aad450', '#026467', '#fefefe', '#928779', '#D4D2A5', "#FCDEBE", '#90A583', '#B26E63', '#C6CAED'];
 
   categories :Category[]=[];
+  categoryName : string = '';
+
+  dataStatus : string='Add';
+
+  catId : string='';
   
 
   constructor (private categoryService : CategoryService){}
@@ -24,17 +29,32 @@ export class CategoryComponent implements OnInit{
   }
   onSubmit(f:NgForm)
   {
-    let randomNumber = Math.floor(Math.random() * this.color.length);
-    let todoCategory ={
-      category : f.value.categoryName,
-      colorCode : this.color[randomNumber],
-      todoCount:0
+    if(this.dataStatus=='Add'){
+      let randomNumber = Math.floor(Math.random() * this.color.length);
+      let todoCategory ={
+        category : f.value.categoryName,
+        colorCode : this.color[randomNumber],
+        todoCount:0
+      }
+      this.categoryService.saveCategory(todoCategory);
+        this.categoryService.loadCategories().subscribe(val=>{
+          this.categories=val;
+        f.resetForm();
+        });
     }
-    this.categoryService.saveCategory(todoCategory);
-      this.categoryService.loadCategories().subscribe(val=>{
-        this.categories=val;
-      });
+    else if(this.dataStatus='Edit')
+    {
+        this.categoryService.updateCategory(this.catId, f.value.categoryName);
+        f.resetForm();
+        this.dataStatus='Add';
+    }
     };
-    // console.log(randomNumber);
+    
+    onEdit(category:string , id:string){
+      //2 way data bindng method 
+      this.categoryName = category;
+      this.dataStatus= 'Edit';
+      this.catId= id;
+    }
   }
 

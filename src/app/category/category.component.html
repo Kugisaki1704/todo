@@ -11,11 +11,11 @@
   <div class="col-md-12">
     <form #f="ngForm" (ngSubmit)='f.form.valid && onSubmit(f)' class="form-inline">
       <div class="form-group">
-        <input type="text" placeholder="add new categories" name="categoryName"class="col-md-10 m-2 drop-shadow " ngModel required #category = 'ngModel' [ngClass]="{'border-danger':f.submitted && category.invalid}"/>
+        <input type="text" placeholder="add new categories" name="categoryName"class="col-md-10 m-2 drop-shadow " [(ngModel)]="categoryName" required #category = 'ngModel' [ngClass]="{'border-danger':f.submitted && category.invalid}"/>
         <button
           type="submit"
           class="col-md-2 m-2 btn btn-primary btn-todo btn-block drop-shadow">
-          Add
+          {{ dataStatus }}
         </button>
 
         <div class="test-danger ml-3 text" *ngIf="f.submitted && category?.invalid && category?.errors?.['required']">
@@ -35,7 +35,7 @@
             <div class="badge badge-primary">CATEGORY</div>
           </div>
           <div class="float-end cat-tools">
-            <small><i class="fa fa-pencil-alt text-success"></i></small>
+            <small><i class="fa fa-pencil-alt text-success" (click)="onEdit(category.category , category.id)"></i></small>
             <small><i class="fa fa-trash text-danger"></i></small>
           </div>
         </div>
