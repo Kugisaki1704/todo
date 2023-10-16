@@ -7,7 +7,7 @@ const routes: Routes = [
 
   //default path url
   {path: '', component: CategoryComponent},
-  {path: 'todo', component: TodoComponent}
+  {path: 'todo/:id', component: TodoComponent}
 ];
 
 @NgModule({
