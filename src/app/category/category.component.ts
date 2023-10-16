@@ -59,5 +59,6 @@ export class CategoryComponent implements OnInit{
     onDelete(id:string){
         this.categoryService.deleteCategory(id);
     }
+    
   }
 

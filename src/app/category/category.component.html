@@ -11,7 +11,7 @@
   <div class="col-md-12">
     <form #f="ngForm" (ngSubmit)='f.form.valid && onSubmit(f)' class="form-inline">
       <div class="form-group">
-        <input type="text" placeholder="add new categories" name="categoryName"class="col-md-10 m-2 drop-shadow " [(ngModel)]="categoryName" required #category = 'ngModel' [ngClass]="{'border-danger':f.submitted && category.invalid}"/>
+        <input type="text" placeholder="add new categories" name="categoryName"class="col-md-10 m-2 drop-shadow " [(ngModel)]='categoryName' required #category = 'ngModel' [ngClass]="{'border-danger':f.submitted && category.invalid}"/>
         <button
           type="submit"
           class="col-md-2 m-2 btn btn-primary btn-todo btn-block drop-shadow">
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="todo-content">
+        <div class="todo-content" [routerLink]='["/todo",category.id]'>
           <!-- category.component.html -->
             <h3 [style.color]="category.colorCode">{{ category.category }}</h3>
 

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore , AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/compat/firestore';
+import { AngularFirestore , AngularFirestoreCollection} from '@angular/fire/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Category } from "./category.model";
-import { collection } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
