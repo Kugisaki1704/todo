@@ -9,14 +9,17 @@
   
   <div class="row">
     <div class="col-md-12">
-      <form action="" class="form-inline">
+      <form #f="ngForm" (ngSubmit)='f.form.valid && onSubmit(f)' class="form-inline">
         <div class="form-group">
-          <input type="text" placeholder="add new todo" name="todoText" class="col-md-10 m-2 drop-shadow" />
+          <input type="text" placeholder="add new todo" name="todoText" class="col-md-10 m-2 drop-shadow" ngModel required #todo = 'ngModel' [ngClass]="{'border-danger':f.submitted && todo.invalid}"/>
           <button
             type="submit"
             class="col-md-2 m-2 btn btn-primary btn-todo btn-block drop-shadow">
             Add
           </button>
+          <div class="test-danger ml-3 text" *ngIf="f.submitted && todo?.invalid && todo?.errors?.['required']">
+            Category is Required...
+          </div>
       </div>
       </form>
     </div>
