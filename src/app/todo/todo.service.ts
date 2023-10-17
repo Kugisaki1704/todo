@@ -38,9 +38,9 @@ export class TodoService {
   
 loadTodos(id:string):Observable<Todo[]> {
   const categoryDocRef = this.afs.doc(`categories/${id}`);
-  return categoryDocRef.collection('todos').valueChanges({ idField: 'id' }) as Observable<Todo[]>;
-    // const todosCollection = categoryDocRef.collection('todos');
-    // todosCollection.valueChanges({ idField: 'id' });
+  // return categoryDocRef.collection('todos').valueChanges({ idField: 'id' }) as Observable<Todo[]>;
+    const todosCollection = categoryDocRef.collection('todos');
+    todosCollection.valueChanges({ idField: 'id' });
 }
 
   
