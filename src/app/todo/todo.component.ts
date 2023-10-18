@@ -11,6 +11,10 @@ import { Todo } from './todo.model';
 export class TodoComponent{
   catId : string='';
   todos:Todo[]=[];
+  todoValue : string = '';
+  todoId:string='';
+
+  dataStatus : string='Add';
   constructor(private todoService:TodoService, private activatedRoute : ActivatedRoute) {}
 
   ngOnInit():void{
@@ -23,11 +27,33 @@ export class TodoComponent{
   }
 
   onSubmit(f:NgForm){
-    let todo={
-      todo:f.value.todoText,
-      isCompleted : false
+
+    if (this.dataStatus == 'Add')
+    {
+      let todo={
+        todo:f.value.todoText,
+        isCompleted : false
+      }
+      this.todoService.saveTodo(this.catId , todo);
+      f.resetForm();
     }
-    this.todoService.saveTodo(this.catId , todo);
-    f.resetForm();
+    else if(this.dataStatus == 'Edit')
+    {
+      this.todoService.updateTodo(this.catId,this.todoId,f.value.todoText);
+      f.resetForm();
+      this.dataStatus = 'Add';
+    }
   }
+
+  onEdit(todo:string , id:string){
+    //2 way data bindng method 
+    this.todoValue = todo;
+    this.dataStatus= 'Edit';
+    this.todoId= id;
+
+  }
+
+  onDelete(id:string){
+    this.todoService.deleteTodo( this.catId , id);
+}
 }
