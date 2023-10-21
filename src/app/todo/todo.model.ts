@@ -2,7 +2,7 @@
 export interface Todo {
   id:string;
     todo: string; 
-    // isCompleted:boolean
+    isCompleted:boolean
     // Replace 'string' with the actual type of the todo property
   }
   
