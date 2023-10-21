@@ -39,11 +39,12 @@ export class TodoService {
 loadTodos(id:string):Observable<Todo[]> {
   const categoryDocRef = this.afs.doc(`categories/${id}`);
   return categoryDocRef.collection('todos').valueChanges({ idField: 'id' }).pipe(
-    map((data: (DocumentData & { id: string; })[]) => {
+    map((data: (DocumentData & { id: string;  })[]) => {
       // Map the data to the Todo type
       return data.map(item => ({
         id: item.id,
-        todo: item['todo'], // Assuming the 'todo' property is available in the DocumentData
+        isCompleted: item['isCompleted'] || false,
+        todo: item['todo'] // Assuming the 'todo' property is available in the DocumentData
         // Map other properties of Todo as needed
       }));
     })
@@ -71,5 +72,19 @@ updateTodo(catId: string, todoId: string, updatedData: string): Promise<void> {
       this.toastr.error('Error deleting Todo: ' + error);
     });
   }
+
+  markCompleted(catId: string, todoId: string): Promise<void> {
+    const todoDocRef = this.afs.doc(`categories/${catId}/todos/${todoId}`);
+    return todoDocRef.update({ isCompleted: true }).then(() => {
+      this.toastr.info('Todo Marked Completed!');
+    });
+    }
+    markUnCompleted(catId: string, todoId: string): Promise<void> {
+      const todoDocRef = this.afs.doc(`categories/${catId}/todos/${todoId}`);
+      return todoDocRef.update({ isCompleted:false }).then(() => {
+        this.toastr.warning('Todo Marked Uncompleted!');
+      });
+      }
+
   }
   
