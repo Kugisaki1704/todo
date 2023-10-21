@@ -13,7 +13,7 @@ export class TodoComponent{
   todos:Todo[]=[];
   todoValue : string = '';
   todoId:string='';
-
+  // isCompleted:boolean="false";
   dataStatus : string='Add';
   constructor(private todoService:TodoService, private activatedRoute : ActivatedRoute) {}
 
@@ -55,5 +55,14 @@ export class TodoComponent{
 
   onDelete(id:string){
     this.todoService.deleteTodo( this.catId , id);
+}
+
+completeTodo(todoId:string)
+{
+  this.todoService.markCompleted(this.catId ,todoId);
+}
+uncompleteTodo(todoId:string)
+{
+  this.todoService.markUnCompleted(this.catId ,todoId);
 }
 }
